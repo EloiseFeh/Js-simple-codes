@@ -1,0 +1,61 @@
+<p>Oi</p><!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="utf-8">
+<head>
+
+	<title>Geração de senha</title>
+	<style>
+		* {
+	      margin: 0;
+	      padding: 0;
+	      box-sizing: border-box;
+	      user-select: none;
+	      /*não permite selecionar o texto ao dar dois cliques */
+	    }
+
+	    body {
+	      font-family: Arial, Helvetica, sans-serif;
+	      display: flex;
+	      justify-content: center;
+	      align-items: center;
+	      height: 100vh;
+	      background-color: #f8f8f8;
+	    }
+
+		#txt{
+			font-size: 2rem;
+		}	  
+ 	   
+	</style>
+	
+	<script type="text/javascript">
+		function startTime()
+		{
+		var today=new Date();
+		var h=today.getHours();
+		var m=today.getMinutes();
+		var s=today.getSeconds();
+		m=checkTime(m);
+		s=checkTime(s);
+		document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+		t=setTimeout('startTime()',500);
+
+		}
+
+		function checkTime(i)
+		{
+		if (i<10)
+		  {
+		  i="0" + i;
+		  }
+		return i;
+		}
+	</script>
+</head>
+<body>
+	<div id="txt">
+		<script type="text/javascript">document.write(startTime())</script>
+	</div>
+
+</body>
+</html>
