@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown</title>
+    <style>
+        .btn-hack {
+            border: 1px solid #dedede;
+            border-bottom: 1px solid #b5b5b5;
+            border-right: none;
+            border-radius: 3px 0 0 3px;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 14px;
+            margin-top: 15px;
+            background: linear-gradient(#fff, #EFEFEF);
+        }
+
+        .btn-hack:hover {
+            background: #EFEFEF;
+        }
+
+        .btn-hack-list {
+            border: 1px solid #dedede;
+            border-bottom: 1px solid #b5b5b5;
+            border-radius: 0 3px 3px 0;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            background: linear-gradient(#fff, #EFEFEF);
+            margin-left: -10px;
+            position: relative;
+        }
+
+        .btn-hack-list:hover {
+            background: #EFEFEF;
+        }
+
+        .btn-hack:active,
+        .btn-hack:focus,
+        .btn-hack-list:active,
+        .btn-hack-list:focus {
+            outline: none;
+            background: #ddd;
+        }
+
+        .btn-arrow {
+            width: 0;
+            height: 0;
+            border-top: 5px solid black;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid transparent;
+            position: relative;
+            top: 10px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            z-index: 1000;
+            display: none;
+            min-width: 160px;
+            padding: 5px 0;
+            margin: -1px 0 0 0;
+            list-style: none;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            background-clip: padding-box;
+        }
+
+        .dropdown-menu a {
+            text-decoration: none;
+        }
+
+        .dropdown-menu a li {
+            font-size: 12px;
+            font-family: arial, sans-serif;
+            color: #222;
+            padding: 5px 15px;
+        }
+
+        .dropdown-menu a li:hover {
+            background-color: #bae2fc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dropdown-box">
+        <div class="hack">
+            <button class="btn-hack">Clique aqui</button>
+            <button class="btn-hack-list" id="dropBtn2"><span class="btn-arrow"></span></button>
+            <ul class="dropdown-menu">
+                <a href="#">
+                    <li>Feliz</li>
+                </a>
+                <a href="#">
+                    <li>Hacktober</li>
+                </a>
+                <a href="#">
+                    <li>Fest</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let toClose = false
+
+        function toggle(e) {
+            e.stopPropagation();
+            let btn = this;
+            let menu = btn.nextSibling;
+
+            while (menu && menu.nodeType != 1) {
+                menu = menu.nextSibling
+            }
+            if (!menu) return;
+            if (menu.style.display !== 'block') {
+                menu.style.display = 'block';
+                if (toClose) toClose.style.display = "none";
+                toClose = menu;
+            } else {
+                menu.style.display = 'none';
+                toClose = false;
+            }
+
+        };
+        function closeAll() {
+            toClose.style.display = 'none';
+        };
+
+        window.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".btn-hack-list").forEach(function (btn) {
+                btn.addEventListener("click", toggle, true);
+            });
+        });
+
+        window.onclick = function (event) {
+            if (toClose) {
+                closeAll.call(event.target);
+            }
+        };
+    </script>
+</body>
+
+</html>
